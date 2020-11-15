@@ -6,7 +6,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/java/features/Selenium.feature",glue = {"stepDefinition"}, tags = "@Temp")
+@CucumberOptions(features = "src/test/java/features/Selenium.feature",glue = {"stepDefinition"}, tags = "@SectionFifteen")
 
 public class RunCukesTest {
 	
