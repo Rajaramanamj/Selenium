@@ -43,12 +43,12 @@ Scenario: section 13 practical problems to handle them in selenium
 
 	Given Log into cricbuzz and work with tables
 	
-@SectionFourteen @Smoke
+@SectionFourteen @Smoke @Temp
 Scenario: section 14 miscellneous topics in selenium
 
 	Given Work on broken links
 	
-@SectionFifteen @Regression
+@SectionFifteen @Regression @Temp
 Scenario: section 15 selenium java streams
 
 	Given Perform web table sorting using java streams
