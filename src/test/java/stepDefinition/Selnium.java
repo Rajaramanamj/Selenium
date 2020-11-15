@@ -286,6 +286,7 @@ public class Selnium extends Browser {
 		for(int i=0;i<links.size();i++) {
 			getLinks = links.get(i).getAttribute("href");
 			HttpURLConnection conn = (HttpURLConnection) new URL(getLinks).openConnection();
+			conn.setConnectTimeout(3000);
 			conn.setRequestMethod("HEAD");
 			conn.connect();
 			int responseCode = conn.getResponseCode();
