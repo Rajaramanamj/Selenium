@@ -28,13 +28,13 @@ public class Selnium extends Browser {
 	JavascriptExecutor je = (JavascriptExecutor)driver;
 	//SoftAssert assrt = new SoftAssert();
 
-	public Selnium() throws Exception {
+	public Selnium() throws Throwable {
 		super();
 	}
 	
 
 	@Given("Open Chrome browser and enter the google link and verify title")
-	public void open_Chrome_browser_and_enter_the_google_link_and_verify_title() throws Exception {
+	public void open_Chrome_browser_and_enter_the_google_link_and_verify_title() throws Throwable {
 		System.out.println("Title is " + driver.getTitle() + " Current URL is " + driver.getCurrentUrl());
 		/*System.out.println("Before Test");
 		System.out.println(driver.getPageSource());
@@ -46,7 +46,7 @@ public class Selnium extends Browser {
 	}
 
 	@Given("Identifying selenium locators")
-	public void identifying_selenium_locators() throws Exception {
+	public void identifying_selenium_locators() throws Throwable {
 
 		Generic.FindElementByID("email").sendKeys("Rajaraman");
 		Generic.FindElementByName("pass").sendKeys("123456");
@@ -57,7 +57,7 @@ public class Selnium extends Browser {
 	}
 
 	@Given("Identifying xpath and css in chrome and firefox browsers")
-	public void Identifying_xpath_and_css_in_chrome_and_firefox_browsers() throws Exception {
+	public void Identifying_xpath_and_css_in_chrome_and_firefox_browsers() throws Throwable {
 
 		System.out.println("Start of section 6");
 		String expectedError = "Please check your username and password. If you still can't log in, contact your Salesforce administrator.";
@@ -67,7 +67,7 @@ public class Selnium extends Browser {
 	}
 
 	@Given("Identify forgot password and verify screen loaded")
-	public void Identify_forgot_password_and_verify_screen_loaded() throws Exception {
+	public void Identify_forgot_password_and_verify_screen_loaded() throws Throwable {
 
 		String expectedMsg = "Forgot Your Password";
 		Generic.FindElementByCSS("a[id*='forgot']").click();
@@ -77,7 +77,7 @@ public class Selnium extends Browser {
 	}
 
 	@Given("Identify drop dropdowns")
-	public void identify_drop_dropdowns() throws Exception {
+	public void identify_drop_dropdowns() throws Throwable {
 
 		System.out.println("Start of section 8");
 		driver.get("https://www.spicejet.com/");
@@ -97,7 +97,7 @@ public class Selnium extends Browser {
 	}
 
 	@Given("Working with auto suggestive dropdowns")
-	public void Working_with_auto_suggestive_dropdowns() throws Exception {
+	public void Working_with_auto_suggestive_dropdowns() throws Throwable {
 
 		driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
 		Generic.FindElementByID("autosuggest").sendKeys("ind");
@@ -119,7 +119,7 @@ public class Selnium extends Browser {
 	}
 
 	@Then("Verify the date field enabled or disabled")
-	public void Verify_the_date_field_enabled_or_disabled() throws Exception {
+	public void Verify_the_date_field_enabled_or_disabled() throws Throwable {
 
 		boolean dateEnabled = false;
 		Generic.FindElementByName("ctl00$mainContent$view_date2").click();
@@ -130,7 +130,7 @@ public class Selnium extends Browser {
 	}
 
 	@Given("Working with alerts")
-	public void Working_with_alerts() throws Exception {
+	public void Working_with_alerts() throws Throwable {
 
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 		Generic.FindElementByID("name").sendKeys("Rajaraman");
@@ -142,7 +142,7 @@ public class Selnium extends Browser {
 	}
 	
 	@Given("Log into ecommerce application and select products into carts")
-	public void Log_into_ecommerce_application_and_select_products_into_carts() throws Exception {
+	public void Log_into_ecommerce_application_and_select_products_into_carts() throws Throwable {
 
 		System.out.println("Start of section 9 and 10");
 		String numberOfItems = "";
@@ -168,7 +168,7 @@ public class Selnium extends Browser {
 	}
 	
 	@Then("Click on the cart and proceed to checkout then apply the promo code")
-	public void Click_on_the_cart_and_proceed_to_checkout_then_apply_the_promo_code() throws Exception {
+	public void Click_on_the_cart_and_proceed_to_checkout_then_apply_the_promo_code() throws Throwable {
 		
 		String expectedCode = "Code applied ..!";
 		Generic.FindElementByCSS("img[alt='Cart']").click();
@@ -181,7 +181,7 @@ public class Selnium extends Browser {
 	}
 	
 	@Given("Log into ecommerce application amazon and mouse over the sign in")
-	public void Log_into_ecommerce_application_amazon_and_mouse_over_the_sign_in() throws Exception {
+	public void Log_into_ecommerce_application_amazon_and_mouse_over_the_sign_in() throws Throwable {
 		
 		System.out.println("Start of section 11");
 		driver.get("https://www.amazon.com/");
@@ -190,7 +190,7 @@ public class Selnium extends Browser {
 	}
 	
 	@Given("Navigate to naukri and work on windows")
-	public void Navigate_to_naukri_and_work_on_windows() throws Exception {
+	public void Navigate_to_naukri_and_work_on_windows() throws Throwable {
 		
 		driver.get("https://www.naukri.com/");
 		Generic.FindElementByXpath("//img[contains(@src, 'cognizant')]").click();
@@ -215,7 +215,7 @@ public class Selnium extends Browser {
     }
 	
 	@Given("Navigate to jqueryui and work on frames")
-	public void Navigate_to_jqueryui_and_work_on_frames() throws Exception {
+	public void Navigate_to_jqueryui_and_work_on_frames() throws Throwable {
 		
 		driver.get("https://jqueryui.com/droppable/");
 		driver.switchTo().frame(Generic.FindElementByCSS("iframe[class='demo-frame']"));
@@ -227,7 +227,7 @@ public class Selnium extends Browser {
     }
 	
 	@Given("Log into rahul shetty academy and get the number of links of the footer section limit the webdriver scope")
-	public void Log_into_rahul_shetty_academy_and_get_the_number_of_links_of_the_footer_section_limit_the_webdriver_scope() throws Exception {
+	public void Log_into_rahul_shetty_academy_and_get_the_number_of_links_of_the_footer_section_limit_the_webdriver_scope() throws Throwable {
 		
 		System.out.println("Start of section 12");
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
@@ -255,7 +255,7 @@ public class Selnium extends Browser {
     }
 	
 	@Given("Log into cricbuzz and work with tables")
-	public void Log_into_cricbuzz_and_work_with_tables() throws Exception {
+	public void Log_into_cricbuzz_and_work_with_tables() throws Throwable {
 		
 		System.out.println("Start of section 13");
 		String batsmanDetails;
@@ -276,7 +276,7 @@ public class Selnium extends Browser {
     }
 	
 	@Given("Work on broken links")
-	public void Work_on_broken_links() throws Exception {
+	public void Work_on_broken_links() throws Throwable {
 		
 		System.out.println("Start of section 14");
 		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
@@ -298,7 +298,7 @@ public class Selnium extends Browser {
     }
 	
 	@Given("Perform web table sorting using java streams")
-	public void Perform_web_table_sorting_using_java_streams() throws Exception {
+	public void Perform_web_table_sorting_using_java_streams() throws Throwable {
 		
 		System.out.println("Start of section 15");
 		List<String> price;
@@ -313,7 +313,7 @@ public class Selnium extends Browser {
 		
 		do {
 		//get the price of Beans
-		List<WebElement> vegOffers = Generic.FindElementsByXpath("//tr//td[1]"); //When page changes we must need to grab the elements again otherwise stale element exception occur
+		List<WebElement> vegOffers = Generic.FindElementsByXpath("//tr//td[1]"); //When page changes we must need to grab the elements again otherwise stale element Throwable occur
 		price = vegOffers.stream().filter(s-> s.getText().contains("Orange")).map(s-> getPriceValue(s)).collect(Collectors.toList());
 		price.stream().forEach(a->System.out.println(a));
 		
@@ -330,7 +330,7 @@ public class Selnium extends Browser {
 	}
 	
 	@Given("Filter the web table using selenium java streams")
-	public void Filter_the_web_table_using_selenium_java_streams() throws Exception {
+	public void Filter_the_web_table_using_selenium_java_streams() throws Throwable {
 		
 		Generic.FindElementByCSS("input[type='search']").sendKeys("C");
 		List<WebElement> filteredList = Generic.FindElementsByXpath("//tr//td[1]");
