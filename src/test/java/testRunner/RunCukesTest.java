@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 		stepNotifications = true,
 		features = "src/test/java/features/Selenium.feature",
 		glue = {"stepDefinition"}, 
-		tags = "@Temp")
+		tags = "@Regression")
 
 public class RunCukesTest {
 	

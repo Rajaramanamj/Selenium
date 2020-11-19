@@ -43,7 +43,7 @@ Scenario: section 13 practical problems to handle them in selenium
 
 	Given Log into cricbuzz and work with tables
 	
-@SectionFourteen @Smoke @Temp
+@SectionFourteen @Regression @Temp
 Scenario: section 14 miscellneous topics in selenium
 
 	Given Work on broken links

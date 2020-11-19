@@ -14,18 +14,24 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 /*import org.testng.Assert;
 import org.testng.asserts.SoftAssert;*/
 import browser.Browser;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import pageobjects.SectionFifteen;
 import resources.Generic;
 
 public class Selnium extends Browser {
 
 	Generic generic = new Generic();
+	WebDriverWait wait=new WebDriverWait(driver,10);
 	Actions action = new Actions(driver);
 	JavascriptExecutor je = (JavascriptExecutor)driver;
+	SectionFifteen sectionFifteen = new SectionFifteen();
 	//SoftAssert assrt = new SoftAssert();
 
 	public Selnium() throws Throwable {
@@ -62,7 +68,8 @@ public class Selnium extends Browser {
 		System.out.println("Start of section 6");
 		String expectedError = "Please check your username and password. If you still can't log in, contact your Salesforce administrator.";
 		Generic.FindElementByCSS("input[type='submit']").click();
-		String actualError = Generic.getTextByCss("div#error");
+		String actualError=wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#error"))).getText();
+		System.out.println(actualError);
 		Assert.assertEquals(expectedError, actualError);
 	}
 
@@ -332,10 +339,7 @@ public class Selnium extends Browser {
 	@Given("Filter the web table using selenium java streams")
 	public void Filter_the_web_table_using_selenium_java_streams() throws Throwable {
 		
-		Generic.FindElementByCSS("input[type='search']").sendKeys("C");
-		List<WebElement> filteredList = Generic.FindElementsByXpath("//tr//td[1]");
-		filteredList.stream().filter(s->s.getText().contains("Cheese")).map(s->getPriceValue(s)).forEach(s->System.out.println(s));
-		System.out.println("Develop Branch Code");
+		sectionFifteen.searchItems();
 	}
 	
 	
