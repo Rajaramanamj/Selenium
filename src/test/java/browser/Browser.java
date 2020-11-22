@@ -96,7 +96,23 @@ public class Browser  {
     '*************************************************************************************************************************************************************************************************************************/
 	public static void SetSystemProperty() throws Exception 
 	{		
-		  String browserName = prop.getProperty("BrowserName");	
+		  String browserName = prop.getProperty("BrowserName");
+		  
+		 /* String [] browsers = browserName.split(",");
+		  for(int i=0;i<browsers.length;i++) {
+			  if(browsers[i].equalsIgnoreCase("Chrome")) {
+				  System.setProperty("webdriver.chrome.driver","C:\\Projects\\SeleniumCucumber\\Selenium\\chromedriver.exe");
+				  driver = new ChromeDriver();
+                  session = ((ChromeDriver)driver).getSessionId();
+				  System.out.println(session);
+			  }else if(browsers[i].equalsIgnoreCase("Firefox")) {
+				  System.setProperty("webdriver.firefox.driver","C:\\Projects\\SeleniumCucumber\\Selenium\\geckodriver.exe");
+				  driver = new FirefoxDriver();
+                  session = ((FirefoxDriver)driver).getSessionId();
+				  System.out.println(session);
+			  }
+		  }*/
+		  
 	
 		 switch(browserName){
 				case "Chrome":
