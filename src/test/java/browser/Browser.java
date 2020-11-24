@@ -96,7 +96,8 @@ public class Browser  {
     '*************************************************************************************************************************************************************************************************************************/
 	public static void SetSystemProperty() throws Exception 
 	{		
-		  String browserName = prop.getProperty("BrowserName");
+		  //String browserName = prop.getProperty("BrowserName");
+		  String browserName = System.getProperty("browser");
 		  
 		 /* String [] browsers = browserName.split(",");
 		  for(int i=0;i<browsers.length;i++) {
