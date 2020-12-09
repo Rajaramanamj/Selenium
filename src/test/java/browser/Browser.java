@@ -1,14 +1,21 @@
 package browser;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
+
 
 /*import com.ford.esow.helper.Constants;
 import com.ford.esow.pageobjects.Login;*/
@@ -47,6 +54,7 @@ public class Browser  {
     	}
     	
     	if(driver == null || strDriverValue.contains("null")){	
+    		 //Browser.dockerUp();
     		 Browser.LoadConfigFile(); //Load the Config file
     		 Browser.SetSystemProperty(); //Launch the browser
 	   		 try{
@@ -72,7 +80,7 @@ public class Browser  {
     '*************************************************************************************************************************************************************************************************************************/
     public static Properties LoadConfigFile(){
     	try{
-     	   File file = new File(System.getProperty("user.dir")+"\\src\\test\\java\\resources\\config.properties"); 		  
+     	   File file = new File(System.getProperty("user.dir")+"\\src\\test\\java\\helper\\config.properties"); 		  
  		   FileInputStream  fileInput = new FileInputStream(file);
  		    prop = new Properties();
  		    prop.load(fileInput);
@@ -96,10 +104,12 @@ public class Browser  {
     '*************************************************************************************************************************************************************************************************************************/
 	public static void SetSystemProperty() throws Exception 
 	{		
-		  //String browserName = prop.getProperty("BrowserName");
-		  String browserName = System.getProperty("browser");
+			DesiredCapabilities cap;
+			URL url;
+		  String browserName = prop.getProperty("browser");
+		  //String browserName = System.getProperty("browser");
 		  
-		 /* String [] browsers = browserName.split(",");
+		  /*String [] browsers = browserName.split(",");
 		  for(int i=0;i<browsers.length;i++) {
 			  if(browsers[i].equalsIgnoreCase("Chrome")) {
 				  System.setProperty("webdriver.chrome.driver","C:\\Projects\\SeleniumCucumber\\Selenium\\chromedriver.exe");
@@ -117,19 +127,48 @@ public class Browser  {
 	
 		 switch(browserName){
 				case "Chrome":
-					System.setProperty("webdriver.chrome.driver","C:\\Projects\\SeleniumCucumber\\Selenium\\chromedriver.exe");
-				    driver = new ChromeDriver();
-                    session = ((ChromeDriver)driver).getSessionId();
-				    System.out.println(session);
+					String chrome = System.getProperty("user.dir")+"\\chromedriver.exe";
+					System.setProperty("webdriver.chrome.driver",chrome);
+					/*cap = DesiredCapabilities.chrome();
+					url = new URL("http://localhost:4444/wd/hub");
+				    driver = new RemoteWebDriver(url, cap);*/
+					driver = new ChromeDriver();
+                   /* session = ((ChromeDriver)driver).getSessionId();
+				    System.out.println(session);*/
 				    break;				    
 				case "Firefox":
-					System.setProperty("webdriver.firefox.driver","C:\\Projects\\SeleniumCucumber\\Selenium\\geckodriver.exe");
-				    driver = new FirefoxDriver();
-                    session = ((FirefoxDriver)driver).getSessionId();
-				    System.out.println(session);
+					String firefox = System.getProperty("user.dir")+"\\geckodriver.exe";
+					/*System.setProperty("webdriver.firefox.driver",firefox);
+					cap = DesiredCapabilities.firefox();
+					url = new URL("http://localhost:4444/wd/hub");
+				    driver = new RemoteWebDriver(url, cap);*/
+					driver = new FirefoxDriver();
+                    /*session = ((FirefoxDriver)driver).getSessionId();
+				    System.out.println(session);*/
 				    break;
 		 }	
-    }	
+    }
+	
+	/*public static void dockerUp() throws IOException, InterruptedException {
+		
+		boolean dockerup = false;
+		Runtime runtime = Runtime.getRuntime();
+		runtime.exec("cmd /c start dockerup.bat");
+		BufferedReader reader = new BufferedReader(new FileReader("output.txt"));
+		String currentLine = reader.readLine();
+		while(currentLine != null) {
+			if(currentLine.contains("Registering the node to the hub")) {
+				System.out.println("Log Found");
+				dockerup = true;
+				break;
+			}
+			currentLine = reader.readLine();
+		}
+		reader.close();
+		Assert.assertTrue(dockerup);
+		Thread.sleep(3000);
+		
+	}*/
 	
 }
 

@@ -1,6 +1,7 @@
+@First
 Feature: Selenium Learning
 
-@LearnSelenium @Regression
+@LearnSelenium @Regression @QuickRegression
 Scenario: Learning selenium from scratch
 
 	Given Open Chrome browser and enter the google link and verify title
@@ -26,7 +27,7 @@ Scenario: section 9 and 10 deep dive into selenium automation
 	Given Log into ecommerce application and select products into carts
 	Then Click on the cart and proceed to checkout then apply the promo code
 	
-@SectionEleven @Regression @QuickRegression
+@SectionEleven @Regression
 Scenario: section 11 automate ajax calls, child windows and iFrames
 
 	Given Log into ecommerce application amazon and mouse over the sign in
@@ -42,17 +43,6 @@ Scenario: section 12 real time exercises
 Scenario: section 13 practical problems to handle them in selenium
 
 	Given Log into cricbuzz and work with tables
-	
-@SectionFourteen @Regression @Temp
-Scenario: section 14 miscellneous topics in selenium
-
-	Given Work on broken links
-	
-@SectionFifteen @Regression @Temp
-Scenario: section 15 selenium java streams
-
-	Given Perform web table sorting using java streams
-	Given Filter the web table using selenium java streams
 	
 	
 	

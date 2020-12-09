@@ -1,4 +1,4 @@
-package resources;
+package helper;
 
 public enum APIResources {
 	

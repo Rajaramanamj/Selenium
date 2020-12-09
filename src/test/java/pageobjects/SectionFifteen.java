@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import objectRepository.SectionFifteenOR;
-import resources.Generic;
+import helper.Generic;
 
 public class SectionFifteen {
 	
