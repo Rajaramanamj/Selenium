@@ -31,7 +31,45 @@ public class Browser  {
     public static String UserID;
     public static String Password;
     public static SessionId session;
-    public static String strDriverValue; 
+    public static String strDriverValue;
+    
+    public static WebDriver getDriver() {
+    	
+    	DesiredCapabilities cap;
+		URL url;
+		if(!(driver == null)){
+   		 if(!(driver.toString() == null)){
+   			 strDriverValue = driver.toString();
+   		 }
+   		 else{
+   			 strDriverValue = ""; 
+   		 }
+   	}
+		try {
+			if(driver == null || strDriverValue.contains("null")){
+					Browser.LoadConfigFile();
+					String browserName = prop.getProperty("browser");
+				  //String browserName = System.getProperty("browser");
+			if(browserName.equalsIgnoreCase("Chrome")) {
+					String chrome = System.getProperty("user.dir")+"\\chromedriver.exe";
+					System.setProperty("webdriver.chrome.driver",chrome);
+			    	driver = new ChromeDriver();
+			}else if(browserName.equalsIgnoreCase("Firefox")) {
+					String firefox = System.getProperty("user.dir")+"\\geckodriver.exe";
+					System.setProperty("webdriver.firefox.driver",firefox);
+					driver = new FirefoxDriver();
+			}
+					 timeout = Integer.parseInt(prop.getProperty("TimeOut"));
+					 Browser.getDriver().get(prop.getProperty("URL"));
+					 Browser.getDriver().manage().timeouts().implicitlyWait(timeout,TimeUnit.SECONDS) ;	
+					 Browser.getDriver().manage().window().maximize();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	return driver;
+    }
     
  /*******************************************************************************************************************************************************************************************************************
     'Created By			: rrajara9						
@@ -41,8 +79,9 @@ public class Browser  {
     'Parameters Used	: NA
     'Purpose			: To Launch the browser
     'Steps:
-    '************************************************************************************************************************************************************************************************************************/
-    public Browser() throws Exception{
+    '
+ * @return ************************************************************************************************************************************************************************************************************************/
+    /*public void browserDriver() throws Exception{
     	
     	if(!(driver == null)){
     		 if(!(driver.toString() == null)){
@@ -56,18 +95,18 @@ public class Browser  {
     	if(driver == null || strDriverValue.contains("null")){	
     		 //Browser.dockerUp();
     		 Browser.LoadConfigFile(); //Load the Config file
-    		 Browser.SetSystemProperty(); //Launch the browser
+    		 Browser.getDriver(); //Launch the browser
 	   		 try{
 	   			 timeout = Integer.parseInt(prop.getProperty("TimeOut"));
-	   			 driver.get(prop.getProperty("URL"));
-	   			 driver.manage().timeouts().implicitlyWait(timeout,TimeUnit.SECONDS) ;	
-	   			 driver.manage().window().maximize();
+	   			 Browser.getDriver().get(prop.getProperty("URL"));
+	   			 Browser.getDriver().manage().timeouts().implicitlyWait(timeout,TimeUnit.SECONDS) ;	
+	   			 Browser.getDriver().manage().window().maximize();
 	   		 }
 	   		 catch(Exception e){
 	   			 System.out.println(e.getLocalizedMessage());
 	    	}
     	}
-    }
+    }*/
   	  
     /*******************************************************************************************************************************************************************************************************************
     'Created By			: rrajara9						
@@ -102,14 +141,14 @@ public class Browser  {
     'Purpose			: To set system property for browser
     'Steps:
     '*************************************************************************************************************************************************************************************************************************/
-	public static void SetSystemProperty() throws Exception 
+	/*public static void SetSystemProperty() throws Exception 
 	{		
 			DesiredCapabilities cap;
 			URL url;
 		  String browserName = prop.getProperty("browser");
 		  //String browserName = System.getProperty("browser");
 		  
-		  /*String [] browsers = browserName.split(",");
+		  String [] browsers = browserName.split(",");
 		  for(int i=0;i<browsers.length;i++) {
 			  if(browsers[i].equalsIgnoreCase("Chrome")) {
 				  System.setProperty("webdriver.chrome.driver","C:\\Projects\\SeleniumCucumber\\Selenium\\chromedriver.exe");
@@ -122,32 +161,32 @@ public class Browser  {
                   session = ((FirefoxDriver)driver).getSessionId();
 				  System.out.println(session);
 			  }
-		  }*/
+		  }
 		  
 	
 		 switch(browserName){
 				case "Chrome":
 					String chrome = System.getProperty("user.dir")+"\\chromedriver.exe";
 					System.setProperty("webdriver.chrome.driver",chrome);
-					/*cap = DesiredCapabilities.chrome();
+					cap = DesiredCapabilities.chrome();
 					url = new URL("http://localhost:4444/wd/hub");
-				    driver = new RemoteWebDriver(url, cap);*/
+				    driver = new RemoteWebDriver(url, cap);
 					driver = new ChromeDriver();
-                   /* session = ((ChromeDriver)driver).getSessionId();
-				    System.out.println(session);*/
+                    session = ((ChromeDriver)driver).getSessionId();
+				    System.out.println(session);
 				    break;				    
 				case "Firefox":
 					String firefox = System.getProperty("user.dir")+"\\geckodriver.exe";
-					/*System.setProperty("webdriver.firefox.driver",firefox);
+					System.setProperty("webdriver.firefox.driver",firefox);
 					cap = DesiredCapabilities.firefox();
 					url = new URL("http://localhost:4444/wd/hub");
-				    driver = new RemoteWebDriver(url, cap);*/
+				    driver = new RemoteWebDriver(url, cap);
 					driver = new FirefoxDriver();
-                    /*session = ((FirefoxDriver)driver).getSessionId();
-				    System.out.println(session);*/
+                    session = ((FirefoxDriver)driver).getSessionId();
+				    System.out.println(session);
 				    break;
 		 }	
-    }
+    }*/
 	
 	/*public static void dockerUp() throws IOException, InterruptedException {
 		

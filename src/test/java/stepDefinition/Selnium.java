@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,20 +28,19 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pageobjects.SectionFifteen;
 //import resources.Generic;
+import pageobjects.SelniumPageObjects;
 
-public class Selnium extends Browser {
+public class Selnium {
 
-	public Selnium() throws Throwable {
-		super();
-	}
-	
+	WebDriver driver = Browser.getDriver();
 	Generic generic = new Generic();
 	WebDriverWait wait=new WebDriverWait(driver,10);
 	Actions action = new Actions(driver);
 	JavascriptExecutor je = (JavascriptExecutor)driver;
 	SectionFifteen sectionFifteen = new SectionFifteen();
+	SelniumPageObjects selniumPageObjects = new SelniumPageObjects(driver);
 	//SoftAssert assrt = new SoftAssert();
-
+	
 	@Given("Open Chrome browser and enter the google link and verify title")
 	public void open_Chrome_browser_and_enter_the_google_link_and_verify_title() throws Throwable {
 		System.out.println("Title is " + driver.getTitle() + " Current URL is " + driver.getCurrentUrl());
@@ -56,12 +56,12 @@ public class Selnium extends Browser {
 	@Given("Identifying selenium locators")
 	public void identifying_selenium_locators() throws Throwable {
 
-		Generic.FindElementByID("email").sendKeys("Rajaraman");
-		Generic.FindElementByName("pass").sendKeys("123456");
-		Generic.FindElementByLinkText("Forgotten password?").click();
+		selniumPageObjects.getEmail().sendKeys("Rajaraman");
+		selniumPageObjects.getPass().sendKeys("123456");
+		selniumPageObjects.getForgetPassword().click();
 		driver.get("https://login.salesforce.com/");
-		Generic.FindElementByID("username").sendKeys("Rajaraman");
-		Generic.FindElementByName("pw").sendKeys("123456");
+		selniumPageObjects.getUserName().sendKeys("Rajaraman");
+		selniumPageObjects.getPassword().sendKeys("123456");
 	}
 
 	@Given("Identifying xpath and css in chrome and firefox browsers")
@@ -69,7 +69,7 @@ public class Selnium extends Browser {
 
 		System.out.println("Start of section 6");
 		String expectedError = "Please check your username and password. If you still can't log in, contact your Salesforce administrator.";
-		Generic.FindElementByCSS("input[type='submit']").click();
+		selniumPageObjects.getsubmit().click();
 		String actualError=wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#error"))).getText();
 		System.out.println(actualError);
 		Assert.assertEquals(expectedError, actualError);
@@ -79,7 +79,7 @@ public class Selnium extends Browser {
 	public void Identify_forgot_password_and_verify_screen_loaded() throws Throwable {
 
 		String expectedMsg = "Forgot Your Password";
-		Generic.FindElementByCSS("a[id*='forgot']").click();
+		selniumPageObjects.getforgot().click();
 		String actualMsg = Generic.getTextByCss("h2[class*='mb']");
 		Assert.assertEquals(expectedMsg, actualMsg);
 		System.out.println("End of section 6");
@@ -91,7 +91,7 @@ public class Selnium extends Browser {
 		System.out.println("Start of section 8");
 		driver.get("https://www.spicejet.com/");
 		// static dropdowns having select and option values
-		Generic.FindElementByID("divpaxinfo").click();
+		selniumPageObjects.getPaxInfo().click();
 		Generic.selectValueByXpath("//select[contains(@name, 'Adult')]", "2");
 		// Dynamic dropdowns
 		Generic.FindElementByXpath("(//input[contains(@id, 'originStation1')])[1]").click();
@@ -263,7 +263,7 @@ public class Selnium extends Browser {
 		System.out.println("End of section 12");
     }
 	
-	@Given("Log into cricbuzz and work with tables")
+	/*@Given("Log into cricbuzz and work with tables")
 	public void Log_into_cricbuzz_and_work_with_tables() throws Throwable {
 		
 		System.out.println("Start of section 13");
@@ -282,7 +282,7 @@ public class Selnium extends Browser {
 			 }
 		}
 		System.out.println("End of section 13");
-    }
+    }*/
 	
 	
 }

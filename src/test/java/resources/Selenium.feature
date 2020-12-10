@@ -39,10 +39,6 @@ Scenario: section 12 real time exercises
 
 	Given Log into rahul shetty academy and get the number of links of the footer section limit the webdriver scope
 	
-@SectionThirteen @Smoke
-Scenario: section 13 practical problems to handle them in selenium
-
-	Given Log into cricbuzz and work with tables
 	
 	
 	

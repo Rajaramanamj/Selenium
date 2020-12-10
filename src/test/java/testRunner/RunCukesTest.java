@@ -3,6 +3,7 @@ package testRunner;
 import java.io.IOException;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,15 +19,14 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		glue = {"stepDefinition"}, 
 		monochrome = true,
 		plugin = {"pretty","html:target/cucumber","json:target/cucumber.json","junit:target/cukes.xml"},
-		features = {"src/test/java/features"},
-		tags = {"@Example"}
+		features = {"src/test/java/resources"},
+		glue = {"stepDefinition"},
+		tags = {"@First,@Second"}
 		)
 public class RunCukesTest {
 	
-		
 	//ExtentSparkReporter and ExtentReport class
 	/*@Before
 	public void setUp() {

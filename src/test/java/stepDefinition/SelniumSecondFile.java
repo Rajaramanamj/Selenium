@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,13 +20,9 @@ import io.cucumber.java.en.When;
 import helper.Generic;
 import pageobjects.SectionFifteen;
 
-public class SelniumSecondFile extends Browser {
+public class SelniumSecondFile {
 	
-	public SelniumSecondFile() throws Throwable {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
+	WebDriver driver = Browser.getDriver();
 	Generic generic = new Generic();
 	WebDriverWait wait=new WebDriverWait(driver,10);
 	Actions action = new Actions(driver);
