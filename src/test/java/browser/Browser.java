@@ -5,16 +5,20 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
+
+import testRunner.RunCukesTest;
 
 
 /*import com.ford.esow.helper.Constants;
@@ -47,17 +51,24 @@ public class Browser  {
    	}
 		try {
 			if(driver == null || strDriverValue.contains("null")){
+					//Browser.dockerUp();
 					Browser.LoadConfigFile();
 					String browserName = prop.getProperty("browser");
 				  //String browserName = System.getProperty("browser");
 			if(browserName.equalsIgnoreCase("Chrome")) {
-					String chrome = System.getProperty("user.dir")+"\\chromedriver.exe";
+					/*String chrome = System.getProperty("user.dir")+"\\chromedriver.exe";
 					System.setProperty("webdriver.chrome.driver",chrome);
-			    	driver = new ChromeDriver();
+			    	driver = new ChromeDriver();*/
+			    	cap = DesiredCapabilities.chrome();
+					url = new URL("http://localhost:4444/wd/hub");
+				    driver = new RemoteWebDriver(url, cap);
 			}else if(browserName.equalsIgnoreCase("Firefox")) {
-					String firefox = System.getProperty("user.dir")+"\\geckodriver.exe";
+					/*String firefox = System.getProperty("user.dir")+"\\geckodriver.exe";
 					System.setProperty("webdriver.firefox.driver",firefox);
-					driver = new FirefoxDriver();
+					driver = new FirefoxDriver();*/
+					cap = DesiredCapabilities.firefox();
+					url = new URL("http://localhost:4444/wd/hub");
+				    driver = new RemoteWebDriver(url, cap);
 			}
 					 timeout = Integer.parseInt(prop.getProperty("TimeOut"));
 					 Browser.getDriver().get(prop.getProperty("URL"));
@@ -193,10 +204,17 @@ public class Browser  {
 		boolean dockerup = false;
 		Runtime runtime = Runtime.getRuntime();
 		runtime.exec("cmd /c start dockerup.bat");
-		BufferedReader reader = new BufferedReader(new FileReader("output.txt"));
-		String currentLine = reader.readLine();
-		while(currentLine != null) {
-			if(currentLine.contains("Registering the node to the hub")) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.SECOND, 45);
+		long stopNow = cal.getTimeInMillis();
+		while(System.currentTimeMillis()<stopNow) {
+			if(dockerup) {
+				break;
+			}
+			BufferedReader reader = new BufferedReader(new FileReader("output.txt"));
+			String currentLine = reader.readLine();
+		while(currentLine != null && !dockerup) {
+			if(currentLine.contains("The node is registered to the hub and ready to use")) {
 				System.out.println("Log Found");
 				dockerup = true;
 				break;
@@ -204,6 +222,7 @@ public class Browser  {
 			currentLine = reader.readLine();
 		}
 		reader.close();
+	}
 		Assert.assertTrue(dockerup);
 		Thread.sleep(3000);
 		
